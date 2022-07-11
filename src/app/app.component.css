@@ -1,0 +1,32 @@
+.container {
+  background-color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 700px;
+  max-width: 90%;
+}
+.quote-display {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.quote-input {
+  background-color: transparent;
+  border: 2px solid orange;
+  outline: none;
+  width: 100%;
+  height: 15rem;
+  resize: none;
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  color: white;
+  padding-bottom: 5rem;
+}
+.quote-input:focus {
+  border-color: red;
+}
+.title {
+  font-size: 4rem;
+  margin-left: 5rem;
+}
