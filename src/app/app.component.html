@@ -6,6 +6,15 @@
   id="timer"
   [startTime]="startTime"
 ></cd-timer>
+<div class="dropdown" id="dropdown">
+  <label id="difficultyselector" for="difficulty">Choose a difficulty:</label>
+  <select name="difficulty" id="difficulty" [(ngModel)]="selectedDifficulty">
+    <option value="easy">Easy (20s)</option>
+    <option value="medium">Medium (30s)</option>
+    <option value="hard">Hard (40s)</option>
+  </select>
+</div>
+
 <div class="container">
   <div class="quote-display" #quoteDisplay></div>
   <textarea class="quote-input" #quoteInput cols="30" rows="10" (keyup)="checkLetter($event)"></textarea>

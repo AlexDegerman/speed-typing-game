@@ -15,12 +15,13 @@ export class AppComponent {
   @ViewChild('quoteInput')
   quoteInputElement!: ElementRef;
   startTime = 20;
+  selectedDifficulty = 'easy';
   constructor(private randomApi: RandomQuoteApiService) {}
   ngOnInit(): void {
     this.getQuote();
   }
   getQuote() {
-    this.randomApi.getRandomQuote().subscribe((data: Quote) => {
+    this.randomApi.getRandomQuote(this.selectedDifficulty).subscribe((data: Quote) => {
       this.quoteDisplayElement.nativeElement.innerText=""
       this.quote = data.content;
       this.quote.split('').forEach((character: string) => {
