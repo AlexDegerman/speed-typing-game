@@ -9,14 +9,14 @@
 ></cd-timer>
 <div class="dropdown" id="dropdown">
   <label id="difficultyselector" for="difficulty">Choose a difficulty:</label>
-  <select name="difficulty" id="difficulty" [(ngModel)]="selectedDifficulty" >
+  <select name="difficulty" id="difficulty" [(ngModel)]="selectedDifficulty">
     <option (click)="changeTimer()" value="easy">Easy (20s)</option>
     <option (click)="changeTimer()" value="medium">Medium (30s)</option>
     <option (click)="changeTimer()" value="hard">Hard (40s)</option>
   </select>
 </div>
 <div class="start">
-  <button class="startbutton" (click)="startGame(); focusOnInput()">
+  <button class="startbutton" (click)="startGame()">
     Start!
   </button>
 </div>
@@ -27,6 +27,6 @@
     #quoteInput
     cols="30"
     rows="10"
-    (keyup)="checkLetter($event)"
+    (keyup)="checkCharacter($event)"
   ></textarea>
 </div>

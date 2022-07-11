@@ -1,9 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { RandomQuoteApiService } from './random-quote-api.service';
 import { Quote } from './quote';
-import { CdTimerComponent } from 'angular-cd-timer';
-import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,34 +14,39 @@ export class AppComponent {
   @ViewChild('quoteInput')
   quoteInputElement!: ElementRef;
   @ViewChild('basicTimer')
-  timerElement: any
+  timerElement: any;
   startTime = 20;
   selectedDifficulty = 'easy';
+
   constructor(private randomApi: RandomQuoteApiService) {}
+
   ngAfterViewInit() {
+    // Disable timer at start
     this.timerElement.stop();
-    
   }
-  ngOnInit(): void {
-    
-  }
+
+  ngOnInit(): void {}
+
+  //Get a random quote from the api server using the current difficulty level selected
   getQuote() {
     this.timerElement.start();
-    
-    this.randomApi.getRandomQuote(this.selectedDifficulty).subscribe((data: Quote) => {
-      this.quoteDisplayElement.nativeElement.innerText=""
-      this.quote = data.content;
-      this.quote.split('').forEach((character: string) => {
-        const characterSpan = document.createElement('span');
-        characterSpan.innerText = character;
-        this.quoteDisplayElement.nativeElement.appendChild(characterSpan);
+    this.randomApi
+      .getRandomQuote(this.selectedDifficulty)
+      .subscribe((data: Quote) => {
+        this.quoteDisplayElement.nativeElement.innerText = '';
+        this.quote = data.content;
+        this.quote.split('').forEach((character: string) => {
+          const characterSpan = document.createElement('span');
+          characterSpan.innerText = character;
+          this.quoteDisplayElement.nativeElement.appendChild(characterSpan);
+        });
+        this.quoteInputElement.nativeElement.value = null;
       });
-      this.quoteInputElement.nativeElement.value = null;
-    });
-    
   }
-  checkLetter(event: any) {
-    const arrayQuote = this.quoteDisplayElement.nativeElement.querySelectorAll('span');
+  //Function that runs on every key input checking if the character input was correct or incorrect
+  checkCharacter(event: any) {
+    const arrayQuote =
+      this.quoteDisplayElement.nativeElement.querySelectorAll('span');
     const arrayValue = this.quoteInputElement.nativeElement.value.split('');
     let correct = true;
     arrayQuote.forEach((characterSpan: any, index: any) => {
@@ -63,30 +65,27 @@ export class AppComponent {
       }
     });
     if (correct) {
-      alert('You win! Getting new quote!')
+      alert('You win! Getting new quote!');
       this.getQuote();
     }
     if (this.timerElement.get().seconds === 0) {
-      alert('You lost! Restarting!')
+      alert('You lost! Restarting!');
       window.location.reload();
     }
-  
   }
+  // This function the start button calls to start the game and focus on the input box
   startGame() {
+    this.quoteInputElement.nativeElement.focus();
     this.getQuote();
   }
-  focusOnInput() {
-    this.quoteInputElement.nativeElement.focus();
-  }
+  // The difficulty selector calls this function to prepare the timer
   changeTimer() {
     if (this.selectedDifficulty === 'easy') {
       this.startTime = 20;
-    } else if (this.selectedDifficulty === 'medium'){
+    } else if (this.selectedDifficulty === 'medium') {
       this.startTime = 30;
     } else {
       this.startTime = 40;
     }
   }
-
-  
 }
