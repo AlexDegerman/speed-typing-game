@@ -1,6 +1,8 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { RandomQuoteApiService } from './random-quote-api.service';
 import { Quote } from './quote';
+import { CdTimerComponent } from 'angular-cd-timer';
+import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +16,21 @@ export class AppComponent {
   quoteDisplayElement!: ElementRef;
   @ViewChild('quoteInput')
   quoteInputElement!: ElementRef;
+  @ViewChild('basicTimer')
+  timerElement: any
   startTime = 20;
   selectedDifficulty = 'easy';
   constructor(private randomApi: RandomQuoteApiService) {}
+  ngAfterViewInit() {
+    this.timerElement.stop();
+    
+  }
   ngOnInit(): void {
     
   }
   getQuote() {
+    this.timerElement.start();
+    
     this.randomApi.getRandomQuote(this.selectedDifficulty).subscribe((data: Quote) => {
       this.quoteDisplayElement.nativeElement.innerText=""
       this.quote = data.content;
@@ -31,6 +41,7 @@ export class AppComponent {
       });
       this.quoteInputElement.nativeElement.value = null;
     });
+    
   }
   checkLetter(event: any) {
     const arrayQuote = this.quoteDisplayElement.nativeElement.querySelectorAll('span');
@@ -51,7 +62,15 @@ export class AppComponent {
         correct = false;
       }
     });
-    if (correct) this.getQuote();
+    if (correct) {
+      alert('You win! Getting new quote!')
+      this.getQuote();
+    }
+    if (this.timerElement.get().seconds === 0) {
+      alert('You lost! Restarting!')
+      window.location.reload();
+    }
+  
   }
   startGame() {
     this.getQuote();
@@ -59,4 +78,15 @@ export class AppComponent {
   focusOnInput() {
     this.quoteInputElement.nativeElement.focus();
   }
+  changeTimer() {
+    if (this.selectedDifficulty === 'easy') {
+      this.startTime = 20;
+    } else if (this.selectedDifficulty === 'medium'){
+      this.startTime = 30;
+    } else {
+      this.startTime = 40;
+    }
+  }
+
+  
 }
