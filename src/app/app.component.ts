@@ -14,6 +14,7 @@ export class AppComponent {
   quoteDisplayElement!: ElementRef;
   @ViewChild('quoteInput')
   quoteInputElement!: ElementRef;
+  startTime = 20;
   constructor(private randomApi: RandomQuoteApiService) {}
   ngOnInit(): void {
     this.getQuote();

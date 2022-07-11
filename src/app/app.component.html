@@ -1,5 +1,11 @@
 <div class="title">Speed Typing Game</div>
-
+<cd-timer
+  [countdown]="true"
+  format="intelli"
+  class="timer"
+  id="timer"
+  [startTime]="startTime"
+></cd-timer>
 <div class="container">
   <div class="quote-display" #quoteDisplay></div>
   <textarea class="quote-input" #quoteInput cols="30" rows="10" (keyup)="checkLetter($event)"></textarea>
