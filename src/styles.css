@@ -14,3 +14,9 @@ body {
 body, .quote-input {
   font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
 }
+.correct {
+  background-color: green;
+}
+.incorrect {
+  background-color: red;
+}
