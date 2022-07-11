@@ -14,7 +14,9 @@
     <option value="hard">Hard (40s)</option>
   </select>
 </div>
-
+<div class="start">
+  <button class="startbutton" (click)="startGame();focusOnInput()">Start!</button>
+</div>
 <div class="container">
   <div class="quote-display" #quoteDisplay></div>
   <textarea class="quote-input" #quoteInput cols="30" rows="10" (keyup)="checkLetter($event)"></textarea>

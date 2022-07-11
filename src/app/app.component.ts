@@ -18,7 +18,7 @@ export class AppComponent {
   selectedDifficulty = 'easy';
   constructor(private randomApi: RandomQuoteApiService) {}
   ngOnInit(): void {
-    this.getQuote();
+    
   }
   getQuote() {
     this.randomApi.getRandomQuote(this.selectedDifficulty).subscribe((data: Quote) => {
@@ -52,5 +52,11 @@ export class AppComponent {
       }
     });
     if (correct) this.getQuote();
+  }
+  startGame() {
+    this.getQuote();
+  }
+  focusOnInput() {
+    this.quoteInputElement.nativeElement.focus();
   }
 }
