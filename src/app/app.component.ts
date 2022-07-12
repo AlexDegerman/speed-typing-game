@@ -7,7 +7,7 @@ import { Quote } from './quote';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'speed-type-game';
+  title = 'speed-typing-game';
   quote: any;
   @ViewChild('quoteDisplay')
   quoteDisplayElement!: ElementRef;
@@ -48,7 +48,7 @@ export class AppComponent {
     const arrayQuote =
       this.quoteDisplayElement.nativeElement.querySelectorAll('span');
     const arrayValue = this.quoteInputElement.nativeElement.value.split('');
-    let correct = true;
+    let correct = false;
     arrayQuote.forEach((characterSpan: any, index: any) => {
       const character = arrayValue[index];
       if (character == null) {
@@ -58,6 +58,7 @@ export class AppComponent {
       } else if (character === characterSpan.innerText) {
         characterSpan.classList.add('correct');
         characterSpan.classList.remove('incorrect');
+        correct = true;
       } else {
         characterSpan.classList.remove('correct');
         characterSpan.classList.add('incorrect');
