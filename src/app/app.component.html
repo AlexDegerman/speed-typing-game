@@ -9,10 +9,10 @@
 ></cd-timer>
 <div class="dropdown" id="dropdown">
   <label id="difficultyselector" for="difficulty">Choose a difficulty:</label>
-  <select name="difficulty" id="difficulty" [(ngModel)]="selectedDifficulty">
-    <option (click)="changeTimer()" value="easy">Easy (20s)</option>
-    <option (click)="changeTimer()" value="medium">Medium (30s)</option>
-    <option (click)="changeTimer()" value="hard">Hard (40s)</option>
+  <select name="difficulty" id="difficulty" [(ngModel)]="selectedDifficulty" (ngModelChange)="changeTimer()">
+    <option value="easy">Easy (20s)</option>
+    <option value="medium">Medium (30s)</option>
+    <option value="hard">Hard (40s)</option>
   </select>
 </div>
 <div class="start">

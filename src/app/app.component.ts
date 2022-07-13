@@ -1,6 +1,11 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { RandomQuoteApiService } from './random-quote-api.service';
 import { Quote } from './quote';
+      
+      
+
+
+    
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,10 +21,11 @@ export class AppComponent {
   @ViewChild('basicTimer')
   timerElement: any;
   startTime = 20;
-  selectedDifficulty = 'easy';
+  @Input() selectedDifficulty = 'easy';
 
   constructor(private randomApi: RandomQuoteApiService) {}
-
+  
+  
   ngAfterViewInit() {
     // Disable timer at start
     this.timerElement.stop();
